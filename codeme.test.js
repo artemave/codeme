@@ -2,11 +2,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import assert from 'node:assert';
 import codeme from './codeme.js';
-import { exec, spawn } from 'child_process';
+import { exec } from 'child_process';
 import util from 'util';
 
 const execPromise = util.promisify(exec);
-const tmpPath = path.join('./tmp', 'my-temp-dir-')
+const tmpPath = path.join('./tmp', 'test-working-directory')
 
 describe('codeme', function() {
   beforeEach(function() {
