@@ -6,7 +6,6 @@ import { exec, spawn } from 'child_process';
 import util from 'util';
 
 const execPromise = util.promisify(exec);
-const spawnPromise = util.promisify(spawn);
 const tmpPath = path.join('./tmp', 'my-temp-dir-')
 
 describe('codeme', function() {
@@ -69,37 +68,8 @@ describe('codeme', function() {
 
     await codeme(prompt, { cwd: tmpPath })
 
-    const { stdout } = await runNodeTestCommand(tmpPath)
+    const { stdout } = await execPromise('node --test', { cwd: tmpPath })
     assert.match(stdout, /fail 1/)
   })
 })
 
-async function runNodeTestCommand(cwd) {
-  return new Promise((resolve, reject) => {
-    // Spawn the process
-    const process = spawn("node", ["--test"], { cwd });
-
-    const stdout = [];
-    const stderr = [];
-
-    // Handle stdout data
-    process.stdout.on("data", (data) => {
-      stdout.push(data);
-    });
-
-    // Handle stderr data
-    process.stderr.on("data", (data) => {
-      stderr.push(data);
-    });
-
-    // Handle error event
-    process.on("error", (error) => {
-      reject(error)
-    });
-
-    // Handle close event
-    process.on("close", (code) => {
-      resolve({ code, stdout: stdout.toString(), stderr: stderr.toString() })
-    });
-  });
-}
