@@ -11,5 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "mocha": "^10.2.0"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": "latest"
+    }
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.9.4"
   }
 }

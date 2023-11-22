@@ -11,7 +11,7 @@ const tmpPath = path.join('./tmp', 'test-working-directory')
 describe('codeme', function() {
   beforeEach(function() {
     if (fs.existsSync(tmpPath)) {
-      fs.rmdirSync(tmpPath, { force: true })
+      fs.rmSync(tmpPath, { force: true })
     }
     fs.mkdirSync(tmpPath, { recursive: true });
   })
